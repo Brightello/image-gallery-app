@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import {Dashboard, Login, Register, PrivateRoute, Home, NotFound} from './pages/index'
-import {AuthProvider} from "./firebase/auth.jsx";
+import {AuthProvider} from "./context/auth.jsx";
 import {Box} from "@chakra-ui/react";
 import "./styles/main.scss"
 import '@fortawesome/fontawesome-free/css/all.min.css';

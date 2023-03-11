@@ -10,9 +10,7 @@ function useCustomToast() {
             duration: duration * 1000,
             isClosable: true,
             description: content,
-            position:"bottom-right",
-            colorScheme:"blue"
-
+            position:"bottom-right"
         });
 
     }

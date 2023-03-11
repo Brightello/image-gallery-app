@@ -1,6 +1,7 @@
 import * as firebase from "firebase/app";
 import {getAuth} from "firebase/auth";
-import {getFirestore,collection} from 'firebase/firestore'
+import {getFirestore,collection,} from 'firebase/firestore'
+import {getStorage} from "firebase/storage"
 
 
 // Firebase configuration
@@ -21,10 +22,16 @@ const app = firebase.initializeApp({
  //reference to collection
 const colRef = collection(db,"/users")
 
+//Storage
+const storage = getStorage(app)
+
+
  export {
      auth,
      db,
      colRef,
+     storage
+
  }
 
 export default app;
