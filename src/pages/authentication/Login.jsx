@@ -12,12 +12,12 @@ import {
     useToast
 } from "@chakra-ui/react";
 import {Link as ReachLink, useNavigate} from 'react-router-dom';
-import picture from '../assets/art-4946528_1920.jpg'
+import picture from '../../assets/art-4946528_1920.jpg'
 import {BiLockAlt,BiLockOpenAlt} from 'react-icons/bi';
 import {useForm} from "react-hook-form";
-import checkIfUserExists from "../utils/emailChecker.js";
-import {useAuth} from "../context/auth.jsx";
-import useCustomToast from "../hooks/useCustomToast.js";
+import checkIfUserExists from "../../utils/emailChecker.js";
+import {useAuth} from "../../context/auth.jsx";
+import useCustomToast from "../../hooks/useCustomToast.js";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);

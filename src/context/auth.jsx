@@ -8,7 +8,7 @@ export const AuthContext = createContext({
     currentUser: null,
     loginUser: () => Promise,
     registerUser: () => Promise,
-    logoOutUser: () => Promise
+    logOutUser: () => Promise
 })
 export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({children}) =>{
@@ -25,13 +25,14 @@ function registerUser(email,password){
         return createUserWithEmailAndPassword(auth,email,password)
 
 }
-function logoOutUser(){
+function logOutUser(){
         return signOut(auth);
 }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
+            console.log(currentUser)
             setPending(false)
         });
         return () => {
@@ -43,7 +44,7 @@ function logoOutUser(){
         currentUser,
         loginUser,
         registerUser,
-        logoOutUser
+        logOutUser
     }
     return (
         <>

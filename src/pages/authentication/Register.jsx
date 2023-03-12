@@ -12,14 +12,14 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import {Link as ReachLink, useNavigate} from "react-router-dom";
-import picture from "../assets/art-4946528_1920.jpg";
-import countries from "../constants/countries.js";
-import {colRef} from "../firebase/config.js";
+import picture from "../../assets/art-4946528_1920.jpg";
+import countries from "../../constants/countries.js";
+import {colRef} from "../../firebase/config.js";
 import {setDoc,doc} from "firebase/firestore"
-import checkIfUserExists from "../utils/emailChecker.js";
-import {useAuth} from "../context/auth.jsx";
-import getErrorMessage from "../utils/errorMessage.js";
-import useCustomToast from "../hooks/useCustomToast.js";
+import checkIfUserExists from "../../utils/emailChecker.js";
+import {useAuth} from "../../context/auth.jsx";
+import getErrorMessage from "../../utils/errorMessage.js";
+import useCustomToast from "../../hooks/useCustomToast.js";
 
 
 
@@ -45,7 +45,6 @@ function Register() {
                 profile_photo:"",
                 createdAt,
                 uid,
-
             };
             const docRef = doc(colRef, uid);
             await setDoc(docRef, userData);
@@ -57,19 +56,19 @@ function Register() {
         }
     };
 
-    const onSubmit = async (e) =>{
-        e.preventDefault()
-        if (Object.keys(errors).length !== 0) {
-            const messages = getErrorMessage(errors);
-            // })
-showToast("Invalid input","error",6,<ul>
-               {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
-                 ))}
-             </ul>)
-        }
-     await handleRegister()
-    }
+//     const onSubmit = async (e) =>{
+//         e.preventDefault()
+//         if (Object.keys(errors).length !== 0) {
+//             const messages = getErrorMessage(errors);
+//             // })
+// showToast("Invalid input","error",6,<ul>
+//                {messages.map((message, index) => (
+//                     <li key={index}>{message}</li>
+//                  ))}
+//              </ul>)
+//         }
+//       handleRegister()
+//     }
 
     return (
 
@@ -148,7 +147,6 @@ showToast("Invalid input","error",6,<ul>
                     />
                     <Button colorScheme="blue"
                             type="submit"
-                            onClick={(e) => onSubmit(e)}
                     >Register</Button>
                     <Stack/>
                     <Link as={ReachLink} to="/login" align="center" >Already have an account?</Link>

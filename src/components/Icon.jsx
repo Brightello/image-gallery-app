@@ -3,7 +3,7 @@ import {Box} from "@chakra-ui/react";
 
 function Icon({IconComponent,size,color}) {
     return (
-        <Box
+        <
 
         // _hover={{
         //     bg:"gray.200",
@@ -13,7 +13,7 @@ function Icon({IconComponent,size,color}) {
         // }}
         >
             <IconComponent size={size} color={color ? color : ""} />
-        </Box>
+        </>
     );
 }
 
