@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {UserContext} from "../../../context/user.jsx";
 import { ImagesGrid} from "../../../components/index.js";
-import {AiOutlineCamera, AiOutlinePlus} from "react-icons/ai";
+import {AiOutlineCamera} from "react-icons/ai";
 import {Flex, Icon, Text} from "@chakra-ui/react";
 
 function Saved() {

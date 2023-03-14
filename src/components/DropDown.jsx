@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Avatar, AvatarBadge, Box, Flex, List, ListItem, Text} from "@chakra-ui/react";
+import {Avatar, AvatarBadge, Box, Flex, Text} from "@chakra-ui/react";
 import {UserContext} from "../context/user.jsx";
 
 function DropDown({children}) {

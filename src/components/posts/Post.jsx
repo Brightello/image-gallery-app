@@ -2,19 +2,16 @@ import {
     Box,
     Fade,
     Image,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalOverlay, Flex, IconButton, Icon
+    Icon
 } from '@chakra-ui/react';
-import { FiBookmark,FiDownload } from 'react-icons/fi';
+import { FiBookmark } from 'react-icons/fi';
 import {useContext, useState} from "react";
 import {RiBookmarkFill} from "react-icons/ri"
 import {UserContext} from "../../context/user.jsx";
 import useFileStore from "../../hooks/useFileStore.js";
 import {useDisclosure} from "@chakra-ui/react";
 import PostDetails from "./PostDetails.jsx";
-import {useAuth} from "../../context/auth.jsx";
+
 
 
 function Post({file}) {

@@ -12,11 +12,9 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import {Link as ReachLink, useNavigate} from "react-router-dom";
-import picture from "../../assets/art-4946528_1920.jpg";
 import countries from "../../constants/countries.js";
 import {colRef} from "../../firebase/config.js";
 import {setDoc,doc} from "firebase/firestore"
-import checkIfUserExists from "../../utils/emailChecker.js";
 import {useAuth} from "../../context/auth.jsx";
 import useCustomToast from "../../hooks/useCustomToast.js";
 import {Card} from "../../components/index"

@@ -1,9 +1,8 @@
-import { Input as ChakraInput, InputGroup, InputLeftElement } from "@chakra-ui/react";
-// import {IoSearchOutline} from "react-icons/io"
+import { Input as ChakraInput, InputGroup} from "@chakra-ui/react";
+
 function Input({placeholder,value,fontSize}) {
     return (
         <InputGroup>
-            {/*<InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.500" />} />*/}
             <ChakraInput
                 placeholder={placeholder}
                 fontSize={fontSize}

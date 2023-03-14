@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {Box, Flex, Icon, Image, Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/react";
 import {RiBookmarkFill} from "react-icons/ri";
-import {FiBookmark, FiDownload} from "react-icons/fi";
-import {CustomModal, Input} from "../index"
+import {FiBookmark} from "react-icons/fi";
+import {CustomModal} from "../index"
 import {UserContext} from "../../context/user.jsx";
 import {CloseIcon} from "@chakra-ui/icons"
 import useFileStore from "../../hooks/useFileStore.js";

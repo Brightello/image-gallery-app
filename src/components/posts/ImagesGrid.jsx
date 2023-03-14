@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, GridItem} from "@chakra-ui/react"
 import {Post} from "../index.js";
 
-function ImagesGrid({items,templateColumns}) {
+function ImagesGrid({items}) {
 
 
     return (

@@ -4,7 +4,6 @@ import {db} from "../firebase/config.js";
 import {AuthContext, useAuth} from "./auth.jsx";
 import useCustomToast from "../hooks/useCustomToast.js";
 import useFileStore from "../hooks/useFileStore.js";
-import {useNavigate} from "react-router-dom";
 export const UserContext = createContext()
 
 
