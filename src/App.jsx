@@ -17,7 +17,6 @@ function App() {
       <AuthProvider>
         <UserProvider>
   <Routes>
-    <Route  path="/" element={<Header/>}/>
     <Route path="/dashboard" element={<PrivateRoute/>}>
       <Route path="/dashboard" element={<Dashboard/>}>
         <Route path="saved" element={<Saved/>}/>
