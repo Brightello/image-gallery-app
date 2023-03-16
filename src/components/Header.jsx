@@ -55,9 +55,6 @@ function Header() {
                         <ListItem py="10px" onClick={() => handleLogOut()}>
                             Log Out
                         </ListItem>
-                        <ListItem as={ReachLink} to="/update-profile" py="10px">
-                            Update a profile
-                        </ListItem>
                     </List>
                 </DropDown>
             )}
