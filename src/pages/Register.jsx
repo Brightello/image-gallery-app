@@ -1,10 +1,11 @@
 import React, {useState,useRef} from 'react';
 import {Box, Button, Flex, FormControl, Heading, Image, Input, Link, Select, Stack} from "@chakra-ui/react";
-import {Link as ReachLink} from "react-router-dom";
+import {Link as ReachLink, useNavigate} from "react-router-dom";
 import picture from "../assets/art-4946528_1920.jpg";
 import countries from "../constants/countries.js";
-import {createUserWithEmailAndPassword,} from 'firebase/auth'
-import {auth,db} from "../firebase/config.js";
+import {auth,colRef} from "../firebase/config.js";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {addDoc} from "firebase/firestore"
 
 
 function Register() {
@@ -14,16 +15,21 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password,setPassword] = useState("")
     const formRef = useRef(null);
-
+    const navigate = useNavigate()
     const userRegister = async (e) =>{
         e.preventDefault()
        try{
-            const {user} = await auth.createUserWithEmailAndPassword(email,password);
-            await db.collection('users').doc(user.uid).set({
-          firstName,
-                lastName,
-                country
-            })
+            const {user} = await createUserWithEmailAndPassword(auth,email,password)
+        await addDoc(colRef,{
+             country,
+             email,
+             firstName,
+             lastName,
+             uuid: user.uid
+         })
+
+           formRef.current.focus();
+           navigate("/")
        }catch (error){
        console.log("Error creating user:",error)
        }
@@ -54,11 +60,12 @@ break;
                     <Select
                       cursor="pointer"
                       id="form_country"
+                      onChange={(e) => onChange(e)}
                     >
-                        <option value="">Select a country</option>
-                        {countries.map((country,index) =>{
-                        return <option key={index} value={country.value}>
-                            {country.label}
+                        <option value="default">Select a country</option>
+                        {countries.map((country) =>{
+                        return <option key={country.name} value={country.value}>
+                            {country.name} ({country.value})
                         </option>
 
                         })}

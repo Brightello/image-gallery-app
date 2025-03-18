@@ -10,18 +10,20 @@ import {
     Box,
     Image,
     InputRightElement,
-    InputGroup, useRadio
+    InputGroup
 } from "@chakra-ui/react";
-import {Link as ReachLink} from 'react-router-dom';
+import {Link as ReachLink, useNavigate} from 'react-router-dom';
 import picture from '../assets/art-4946528_1920.jpg'
 import {BiLockAlt,BiLockOpenAlt} from 'react-icons/bi';
 import {auth} from "../firebase/config.js";
+import {signInWithEmailAndPassword} from "firebase/auth";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password,setPassword] = useState("")
     const formRef = useRef(null);
+    const navigate = useNavigate();
 
     const onChange = (e) =>{
         switch(e.target.id){
@@ -34,9 +36,9 @@ function Login() {
    const userLogIn = async (e) =>{
         e.preventDefault()
      try{
-         const {user} = await auth.signInWithEmailAndPassword(email,password)
+         await signInWithEmailAndPassword(auth,email,password)
          formRef.current.reset()
-         console.log(user)
+         navigate("/")
 
      }catch (error){
     console.log(error.message)
@@ -51,11 +53,15 @@ function Login() {
         <Flex display="flex" direction="column" align="center" justify="center">
             <Heading mb="30px" as="h1">Login</Heading>
 
-        <FormControl isRequired as="form" mb="20px" onSubmit={(e) => userLogIn(e)}>
+        <FormControl ref={formRef} isRequired as="form" mb="20px" onSubmit={(e) => userLogIn(e)}>
             <Stack spacing={4} >
-            <Input type='email' placeholder="Email" onChange={(e) => onChange(e)}/>
+            <Input id="form_email" type='email' placeholder="Email" onChange={(e) => onChange(e)} value={email}/>
                 <InputGroup>
-            <Input type={showPassword ? "text" : "password"} placeholder="Password" onChange={(e) => onChange(e)}/>
+            <Input type={showPassword ? "text" : "password"}
+                   id="form_password"
+                   placeholder="Password" onChange={(e) => onChange(e)} value={password}
+                  autoComplete="off"
+            />
                     <InputRightElement
                         onClick={ () => showMyPassword()}
                     children={showPassword ? <BiLockOpenAlt/> : <BiLockAlt/>}
