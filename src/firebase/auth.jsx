@@ -1,13 +1,33 @@
-import React, {useEffect, useState} from "react";
-import { auth } from "./config";
-import app from './config'
+import React, {createContext, useContext, useEffect, useState} from "react";
+import {auth} from "./config";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut} from "firebase/auth";
+import {Loader} from "../components/index.js";
 
 
-export const AuthContext = React.createContext();
-
+export const AuthContext = createContext({
+    currentUser: null,
+    loginUser: () => Promise,
+    registerUser: () => Promise,
+    logoOutUser: () => Promise
+})
+export const useAuth = () => useContext(AuthContext)
 export const AuthProvider = ({children}) =>{
     const [currentUser,setCurrentUser] = useState(null);
     const [pending,setPending] = useState(true)
+
+
+
+function loginUser(email,password){
+        return signInWithEmailAndPassword(auth,email,password)
+}
+
+function registerUser(email,password){
+        return createUserWithEmailAndPassword(auth,email,password)
+
+}
+function logoOutUser(){
+        return signOut(auth);
+}
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -19,17 +39,25 @@ export const AuthProvider = ({children}) =>{
         };
     }, []);
 
-    if(pending){
-        return <>Loading...</>
+    const value = {
+        currentUser,
+        loginUser,
+        registerUser,
+        logoOutUser
     }
     return (
-        <AuthContext.Provider
-        value={{
-            currentUser
-        }}
-        >
-            {children}
-        </AuthContext.Provider>
+        <>
+        {pending ? (
+           <Loader/>
+            ) : (
+                  <AuthContext.Provider
+                 value={value}
+                  >
+                      {children}
+                  </AuthContext.Provider>
+            )}
+        </>
+
     )
     
 }

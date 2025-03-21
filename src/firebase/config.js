@@ -3,9 +3,6 @@ import {getAuth} from "firebase/auth";
 import {getFirestore,collection} from 'firebase/firestore'
 
 
-
-
-
 // Firebase configuration
 const app = firebase.initializeApp({
     apiKey: import.meta.env.VITE_APP_FIREBASE_KEY.replace(/[",]/gm,""),

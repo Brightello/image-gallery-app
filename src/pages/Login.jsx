@@ -7,44 +7,42 @@ import {
     Input,
     Stack,
     Link,
-    Box,
-    Image,
     InputRightElement,
-    InputGroup
+    InputGroup, Text,
+    useToast
 } from "@chakra-ui/react";
 import {Link as ReachLink, useNavigate} from 'react-router-dom';
 import picture from '../assets/art-4946528_1920.jpg'
 import {BiLockAlt,BiLockOpenAlt} from 'react-icons/bi';
-import {auth} from "../firebase/config.js";
-import {signInWithEmailAndPassword} from "firebase/auth";
+import {useForm} from "react-hook-form";
+import checkIfUserExists from "../utils/emailChecker.js";
+import {useAuth} from "../firebase/auth.jsx";
+import useCustomToast from "../hooks/useCustomToast.jsx";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password,setPassword] = useState("")
     const formRef = useRef(null);
     const navigate = useNavigate();
+    const {register,handleSubmit,formState:{errors},watch} = useForm()
+    const {email,password} = watch({})
+    const {loginUser} = useAuth();
+    const showToast = useCustomToast();
 
-    const onChange = (e) =>{
-        switch(e.target.id){
-            case "form_email": setEmail(e.target.value);
-                break;
-            case "form_password":setPassword(e.target.value)
-                break;
+    const handleLogin = async () => {
+        try {
+        await loginUser(email, password);
+           formRef.current.reset();
+           navigate("/dashboard")
+           showToast("User successfully logged in","success",3,"Welcome!")
+        } catch (error) {
+            if(error.code === "auth/wrong-password"){
+                showToast("User credentials error","error",3,"Incorrect password. Please try again")
+            }
+
+
         }
-    }
-   const userLogIn = async (e) =>{
-        e.preventDefault()
-     try{
-         await signInWithEmailAndPassword(auth,email,password)
-         formRef.current.reset()
-         navigate("/")
+    };
 
-     }catch (error){
-    console.log(error.message)
-     }
-
-   }
     const showMyPassword = () =>{
         setShowPassword(prevState => !prevState)
     }
@@ -52,37 +50,46 @@ function Login() {
 
         <Flex display="flex" direction="column" align="center" justify="center">
             <Heading mb="30px" as="h1">Login</Heading>
-
-        <FormControl ref={formRef} isRequired as="form" mb="20px" onSubmit={(e) => userLogIn(e)}>
-            <Stack spacing={4} >
-            <Input id="form_email" type='email' placeholder="Email" onChange={(e) => onChange(e)} value={email}/>
+        <FormControl
+            ref={formRef} isRequired as="form" mb="20px" onSubmit={handleSubmit(handleLogin)}
+            noValidate
+        >
+            <Stack spacing={4}>
+            <Input id="form_email" type='email' placeholder="Email"
+                   isInvalid={errors.email}
+                   {...register("email",{
+                       required: {value:true,message:"Please,provide an e-mail"},
+                       validate:async (value) => !await checkIfUserExists(value) || "Invalid e-mail"
+                   })}
+            />
+                {errors.email && <Text>{errors.email.message}</Text>}
                 <InputGroup>
             <Input type={showPassword ? "text" : "password"}
                    id="form_password"
-                   placeholder="Password" onChange={(e) => onChange(e)} value={password}
+                   placeholder="Password"
                   autoComplete="off"
+
+                   {...register("password",{
+                       required: {value:true,message:"Please,provide a password"}
+                   })
+                   }
             />
+
                     <InputRightElement
                         onClick={ () => showMyPassword()}
                     children={showPassword ? <BiLockOpenAlt/> : <BiLockAlt/>}
                         cursor="pointer"
                     />
                 </InputGroup>
+                {errors.password && <Text>{errors.password.message}</Text>}
             <Button colorScheme="blue"
                     type="submit">Login</Button>
-           <Link as={ReachLink} to="/register" align="center" >Don't have an account?</Link></Stack>
+           <Link as={ReachLink} to="/register" align="center" >Don't have an account?</Link>
+        </Stack>
         </FormControl>
-             <Box w="300px" h="400px">
-                 <Image
-                     src={picture}
-                     alt="Placeholder"
-                     w="100%"
-                     h="100%"
-                     objectFit="cover"
-                 />
-             </Box>
-        </Flex>
-    );
+         </Flex>
+    )
+
 }
 
 export default Login;
