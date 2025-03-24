@@ -17,9 +17,9 @@ import countries from "../constants/countries.js";
 import {colRef} from "../firebase/config.js";
 import {setDoc,doc} from "firebase/firestore"
 import checkIfUserExists from "../utils/emailChecker.js";
-import {useAuth} from "../firebase/auth.jsx";
+import {useAuth} from "../context/auth.jsx";
 import getErrorMessage from "../utils/errorMessage.js";
-import useCustomToast from "../hooks/useCustomToast.jsx";
+import useCustomToast from "../hooks/useCustomToast.js";
 
 
 
@@ -36,12 +36,13 @@ function Register() {
         try {
             const { user } = await registerUser(email, password);
             const uid = user.uid;
-            const createdAt = user.createdAt.toDateString();
+            const createdAt = new Date().toDateString()
             const userData = {
                 firstname,
                 lastname,
                 country,
                 email,
+                profile_photo:"",
                 createdAt,
                 uid,
 
@@ -56,7 +57,7 @@ function Register() {
         }
     };
 
-    const onSubmit = (e) =>{
+    const onSubmit = async (e) =>{
         e.preventDefault()
         if (Object.keys(errors).length !== 0) {
             const messages = getErrorMessage(errors);
@@ -67,7 +68,7 @@ showToast("Invalid input","error",6,<ul>
                  ))}
              </ul>)
         }
-       handleRegister()
+     await handleRegister()
     }
 
     return (

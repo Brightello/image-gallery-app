@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Navigate, useLocation} from "react-router-dom";
-import useCustomToast from "../hooks/useCustomToast.jsx";
+import useCustomToast from "../hooks/useCustomToast.js";
 
 function NotFound() {
     const location = useLocation()
