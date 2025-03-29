@@ -12,14 +12,12 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import {Link as ReachLink, useNavigate} from "react-router-dom";
-import picture from "../assets/art-4946528_1920.jpg";
-import countries from "../constants/countries.js";
-import {colRef} from "../firebase/config.js";
+import countries from "../../constants/countries.js";
+import {colRef} from "../../firebase/config.js";
 import {setDoc,doc} from "firebase/firestore"
-import checkIfUserExists from "../utils/emailChecker.js";
-import {useAuth} from "../context/auth.jsx";
-import getErrorMessage from "../utils/errorMessage.js";
-import useCustomToast from "../hooks/useCustomToast.js";
+import {useAuth} from "../../context/auth.jsx";
+import useCustomToast from "../../hooks/useCustomToast.js";
+import {Card} from "../../components/index"
 
 
 
@@ -28,7 +26,7 @@ function Register() {
     const {register,handleSubmit,formState:{errors},watch,} = useForm()
     const navigate = useNavigate()
     const {firstname,lastname,email,country,password} = watch({})
-    const {registerUser} = useAuth()
+    const {registerUser,loginUser} = useAuth()
     const showToast = useCustomToast()
 
 
@@ -42,39 +40,29 @@ function Register() {
                 lastname,
                 country,
                 email,
-                profile_photo:"",
                 createdAt,
                 uid,
-
             };
             const docRef = doc(colRef, uid);
             await setDoc(docRef, userData);
             formRef.current.reset();
-            navigate('/dashboard');
-            showToast("User successfully registered", "success", 3, "Welcome!");
+            navigate("/dashboard")
+            showToast("User successfully registered", "success", 3, "");
         } catch (error) {
-            console.log(error);
+           if(error.code === "auth/email-already-in-use"){
+               showToast("User credentials error", "error", 3, "Email already in-use");
+               console.log(5)
+           }
         }
     };
 
-    const onSubmit = async (e) =>{
-        e.preventDefault()
-        if (Object.keys(errors).length !== 0) {
-            const messages = getErrorMessage(errors);
-            // })
-showToast("Invalid input","error",6,<ul>
-               {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
-                 ))}
-             </ul>)
-        }
-     await handleRegister()
-    }
+
 
     return (
 
-        <Flex display="flex" direction="column" align="center" justify="center" >
-            <Heading mb="30px" as="h1">Register</Heading>
+        <Flex as="main" justify="center" align="center" minH="100vh">
+            <Card title="Register">
+            <Heading mb="30px" as="h1" align="center">Register</Heading>
             <FormControl as="form" isRequired   mb="20px" onSubmit={handleSubmit(handleRegister)}
                          ref={formRef}  noValidate>
                 <Stack spacing={4} >
@@ -123,7 +111,7 @@ showToast("Invalid input","error",6,<ul>
                                    value:/^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail|outlook|aol|msn|live|icloud|me|yandex|mail|gmx|protonmail)\.[a-zA-Z]{2,}$/g,
                                    message: "Email is invalid"
                                },
-                                validate:async (value) => await checkIfUserExists(value) || "E-mail already in use"
+
                            })}
                     />
                     <Input type='password' placeholder="Password" id="form_password" autoComplete="off"
@@ -138,7 +126,8 @@ showToast("Invalid input","error",6,<ul>
                                }
                            })}
                     />
-                    <Input type='password' placeholder="Repeat a password" id="repeat_password" autoComplete="off"
+                    <Input
+                        type='password' placeholder="Repeat a password" id="repeat_password" autoComplete="off"
                            isInvalid={errors.repeat_password}
                            {...register("repeat_password",{
                                required:"Repeat password,please",
@@ -148,12 +137,12 @@ showToast("Invalid input","error",6,<ul>
                     />
                     <Button colorScheme="blue"
                             type="submit"
-                            onClick={(e) => onSubmit(e)}
                     >Register</Button>
                     <Stack/>
                     <Link as={ReachLink} to="/login" align="center" >Already have an account?</Link>
                 </Stack>
             </FormControl>
+            </Card>
         </Flex>
 );
 }

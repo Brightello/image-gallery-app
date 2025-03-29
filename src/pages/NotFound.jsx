@@ -1,21 +1,14 @@
-import React, {useEffect} from 'react';
-import {Navigate, useLocation} from "react-router-dom";
-import useCustomToast from "../hooks/useCustomToast.js";
+import React from 'react';
+import {Navigate} from "react-router-dom";
+import {useAuth} from "../context/auth.jsx";
 
 function NotFound() {
-    const location = useLocation()
-    const path = location.pathname
-    const showToast = useCustomToast()
-    useEffect(() => {
-        return () => {
-            showToast("Path Error","error",3,`Page ${path} does not exist`)
 
-        };
-    }, []);
+    const {currentUser} = useAuth();
 
     return (
         <>
-            <Navigate to="/"/>
+            {currentUser ? <Navigate to="/dashboard"/> : <Navigate to="/login"/> }
         </>
     );
 }

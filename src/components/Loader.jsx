@@ -16,11 +16,12 @@ const dotStyles = css`
 const loaderBoxStyles = css`
   background: #fff;
   overflow: hidden;
-  width: 100px;
+  width: 500px;
   height: 30px;
   position: fixed;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -34,7 +35,7 @@ const loaderBoxStyles = css`
   }
 
   .dot:nth-of-type(3) {
-    animation: ${preloader} 0.8 ease-in-out infinite;
+    animation: ${preloader} 0.8s ease-in-out infinite;
   }
 `;
 
