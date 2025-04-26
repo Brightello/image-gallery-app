@@ -6,7 +6,7 @@ import {getStorage} from "firebase/storage"
 
 // Firebase configuration
 const app = firebase.initializeApp({
-    apiKey: import.meta.env.VITE_APP_FIREBASE_KEY.replace(/[",]/gm,""),
+    apiKey: import.meta.env.VITE_APP_FIREBASE_KEY,
     authDomain: import.meta.env.VITE_APP_FIREBASE_DOMAIN,
     projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
