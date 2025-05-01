@@ -1,13 +1,11 @@
-import React from 'react';
-import {Box} from "@chakra-ui/react";
+import React from "react"
 
-function Icon({IconComponent,size,color}) {
-    return (
-        <
-        >
-            <IconComponent size={size} color={color ? color : ""} />
-        </>
-    );
+function Icon({ IconComponent, size, color }) {
+  return (
+    <>
+      <IconComponent size={size} color={color ? color : ""} />
+    </>
+  )
 }
 
-export default Icon;
+export default Icon

@@ -1,13 +1,27 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from "@vitejs/plugin-react"
+import dotenv from "dotenv"
+import path from "path"
 import sass from "sass"
-import dotenv from 'dotenv'
+import { defineConfig } from "vite"
+import eslint from "vite-plugin-eslint"
+
 // https://vitejs.dev/config/
 
-dotenv.config();
+dotenv.config()
 
 export default defineConfig({
-  base:"/",
-  plugins: [react(),sass],
-
+  base: "/",
+  server: { port: 8080 },
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@constants": path.resolve(__dirname, "./src/constants"),
+      "@context": path.resolve(__dirname, "./src/context"),
+      "#firebase": path.resolve(__dirname, "./src/firebase"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@utils": path.resolve(__dirname, "./src/utils")
+    }
+  },
+  plugins: [react(), sass, eslint()]
 })
