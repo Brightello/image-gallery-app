@@ -8,16 +8,16 @@ import {
   Select,
   Stack
 } from "@chakra-ui/react"
+import { Card } from "@components/index"
+import countries from "@constants/countries.js"
+import { useAuth } from "@context/auth.jsx"
+import useCustomToast from "@hooks/useCustomToast.js"
 import { doc, setDoc } from "firebase/firestore"
 import React, { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Link as ReachLink, useNavigate } from "react-router-dom"
 
-import { Card } from "../../components/index"
-import countries from "../../constants/countries.js"
-import { useAuth } from "../../context/auth.jsx"
-import { colRef } from "../../firebase/config.js"
-import useCustomToast from "../../hooks/useCustomToast.js"
+import { colRef } from "#firebase/config.js"
 
 function Register() {
   const formRef = useRef(null)

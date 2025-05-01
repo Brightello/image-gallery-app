@@ -1,3 +1,5 @@
+import { AuthContext } from "@context/auth.jsx"
+import useCustomToast from "@hooks/useCustomToast"
 import { updateProfile } from "firebase/auth"
 import {
   addDoc,
@@ -22,9 +24,7 @@ import {
 import { useContext } from "react"
 import { v4 as uuidv4 } from "uuid"
 
-import { AuthContext } from "../context/auth.jsx"
-import { db, storage } from "../firebase/config.js"
-import useCustomToast from "../hooks/useCustomToast"
+import { db, storage } from "#firebase/config"
 
 function UseFileStore() {
   const { currentUser } = useContext(AuthContext)

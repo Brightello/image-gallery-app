@@ -1,7 +1,6 @@
 import { Avatar, AvatarBadge, Box, Flex, Text } from "@chakra-ui/react"
+import { UserContext } from "@context/user.jsx"
 import React, { useContext } from "react"
-
-import { UserContext } from "../context/user.jsx"
 
 function DropDown({ children }) {
   const { userData, profilePhoto } = useContext(UserContext)

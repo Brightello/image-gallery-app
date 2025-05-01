@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react"
+import { useAuth } from "@context/auth.jsx"
+import { UserContext } from "@context/user.jsx"
 import React, { useContext, useState } from "react"
 import { GrGallery } from "react-icons/gr"
 import { Link as ReachLink } from "react-router-dom"
 
-import { useAuth } from "../context/auth.jsx"
-import { UserContext } from "../context/user.jsx"
 import { Avatar, DropDown } from "./index.js"
 
 function Header() {
@@ -41,8 +41,6 @@ function Header() {
           </Heading>
         </Flex>
       </Flex>
-      {/*<Input placeholder="Search" />*/}
-
       <Box
         position="relative"
         display={{ base: "none", sm: "block" }}

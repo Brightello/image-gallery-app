@@ -1,9 +1,9 @@
 import { Box, Fade, Icon, Image, useDisclosure } from "@chakra-ui/react"
+import useFileStore from "@hooks/useFileStore.js"
 import { useState } from "react"
 import { FiBookmark } from "react-icons/fi"
 import { RiBookmarkFill } from "react-icons/ri"
 
-import useFileStore from "../../hooks/useFileStore.js"
 import PostDetails from "./PostDetails.jsx"
 
 function Post({ file }) {

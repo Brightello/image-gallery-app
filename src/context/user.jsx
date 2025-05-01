@@ -1,9 +1,10 @@
+import useCustomToast from "@hooks/useCustomToast.js"
+import useFileStore from "@hooks/useFileStore.js"
 import { doc, getDoc } from "firebase/firestore"
 import React, { createContext, useContext, useEffect, useState } from "react"
 
-import { db } from "../firebase/config.js"
-import useCustomToast from "../hooks/useCustomToast.js"
-import useFileStore from "../hooks/useFileStore.js"
+import { db } from "#firebase/config.js"
+
 import { AuthContext, useAuth } from "./auth.jsx"
 
 export const UserContext = createContext()

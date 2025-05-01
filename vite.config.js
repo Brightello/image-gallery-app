@@ -14,8 +14,13 @@ export default defineConfig({
   server: { port: 8080 },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@hooks': path.resolve(__dirname, 'src/hooks')
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@constants": path.resolve(__dirname, "./src/constants"),
+      "@context": path.resolve(__dirname, "./src/context"),
+      "#firebase": path.resolve(__dirname, "./src/firebase"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@utils": path.resolve(__dirname, "./src/utils")
     }
   },
   plugins: [react(), sass, eslint()]

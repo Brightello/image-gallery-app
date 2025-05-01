@@ -1,12 +1,12 @@
 import { CloseIcon } from "@chakra-ui/icons"
 import { Box, Flex, Icon, Image } from "@chakra-ui/react"
+import { useAuth } from "@context/auth.jsx"
+import { UserContext } from "@context/user.jsx"
+import useFileStore from "@hooks/useFileStore.js"
 import React, { useContext } from "react"
 import { FiBookmark } from "react-icons/fi"
 import { RiBookmarkFill } from "react-icons/ri"
 
-import { useAuth } from "../../context/auth.jsx"
-import { UserContext } from "../../context/user.jsx"
-import useFileStore from "../../hooks/useFileStore.js"
 import { CustomModal } from "../index"
 
 function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {

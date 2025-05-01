@@ -1,7 +1,6 @@
+import { useAuth } from "@context/auth.jsx"
 import React from "react"
 import { Navigate } from "react-router-dom"
-
-import { useAuth } from "../context/auth.jsx"
 
 function NotFound() {
   const { currentUser } = useAuth()

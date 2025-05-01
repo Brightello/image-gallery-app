@@ -1,3 +1,4 @@
+import { Loader } from "@components/index"
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -5,8 +6,7 @@ import {
 } from "firebase/auth"
 import React, { createContext, useContext, useEffect, useState } from "react"
 
-import { Loader } from "../components/index.js"
-import { auth } from "../firebase/config.js"
+import { auth } from "#firebase/config.js"
 
 export const AuthContext = createContext({
   currentUser: null,

@@ -10,15 +10,14 @@ import {
   Stack,
   Text
 } from "@chakra-ui/react"
+import { Card } from "@components/index"
+import { useAuth } from "@context/auth.jsx"
+import useCustomToast from "@hooks/useCustomToast.js"
+import checkIfUserExists from "@utils/emailChecker.js"
 import React, { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { BiLockAlt, BiLockOpenAlt } from "react-icons/bi"
 import { Link as ReachLink, useNavigate } from "react-router-dom"
-
-import { Card } from "../../components/index"
-import { useAuth } from "../../context/auth.jsx"
-import useCustomToast from "../../hooks/useCustomToast.js"
-import checkIfUserExists from "../../utils/emailChecker.js"
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)

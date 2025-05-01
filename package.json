@@ -10,8 +10,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.json",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.json --fix",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier . --write \"src/**/*.{js,jsx}\""
   },
   "dependencies": {
@@ -38,6 +38,7 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-simple-import-sort": "^12.1.1",

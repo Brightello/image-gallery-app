@@ -1,9 +1,8 @@
 import { Flex, Icon, Text } from "@chakra-ui/react"
+import { ImagesGrid } from "@components/index"
+import { UserContext } from "@context/user.jsx"
 import React, { useContext, useEffect } from "react"
 import { AiOutlineCamera } from "react-icons/ai"
-
-import { ImagesGrid } from "../../../components/index.js"
-import { UserContext } from "../../../context/user.jsx"
 
 function Saved() {
   const { savedPosts, handleFetchSavedPosts } = useContext(UserContext)

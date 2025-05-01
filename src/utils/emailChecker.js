@@ -1,6 +1,6 @@
 import { getDocs, query, where } from "firebase/firestore"
 
-import { colRef } from "../firebase/config.js"
+import { colRef } from "#firebase/config.js"
 
 const checkIfUserExists = async (email) => {
   const q = await query(colRef, where("email", "==", email))

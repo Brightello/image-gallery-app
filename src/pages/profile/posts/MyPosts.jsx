@@ -1,10 +1,10 @@
 import { AddIcon } from "@chakra-ui/icons"
 import { Box, Flex, Icon, Input, Text } from "@chakra-ui/react"
+import { ImagesGrid } from "@components/index"
+import { UserContext } from "@context/user.jsx"
 import React, { useContext, useEffect } from "react"
 import { AiOutlineCamera } from "react-icons/ai"
 
-import { ImagesGrid } from "../../../components/index.js"
-import { UserContext } from "../../../context/user.jsx"
 function MyPosts() {
   const { myPosts, handleUpload, handleFetchMyPosts } = useContext(UserContext)
 
