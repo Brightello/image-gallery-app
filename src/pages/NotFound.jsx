@@ -1,16 +1,14 @@
-import React from 'react';
-import {Navigate} from "react-router-dom";
-import {useAuth} from "../context/auth.jsx";
+import React from "react"
+import { Navigate } from "react-router-dom"
+
+import { useAuth } from "../context/auth.jsx"
 
 function NotFound() {
+  const { currentUser } = useAuth()
 
-    const {currentUser} = useAuth();
-
-    return (
-        <>
-            {currentUser ? <Navigate to="/dashboard"/> : <Navigate to="/login"/> }
-        </>
-    );
+  return (
+    <>{currentUser ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}</>
+  )
 }
 
-export default NotFound;
+export default NotFound
