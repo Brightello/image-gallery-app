@@ -2,18 +2,12 @@ import { Box, Flex, Input, List, ListItem, Text } from "@chakra-ui/react"
 import { Avatar, Header, Link } from "@components/index"
 import { useAuth } from "@context/auth.jsx"
 import { UserContext } from "@context/user.jsx"
-import React, { useContext, useEffect } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
+import React, { useContext } from "react"
+import { Outlet } from "react-router-dom"
 
 function Dashboard() {
   const { userData, handleChangePhoto } = useContext(UserContext)
   const { currentUser } = useAuth()
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    navigate("/dashboard/my-posts", { replace: true })
-  }, [])
-
   return (
     <>
       {userData && (

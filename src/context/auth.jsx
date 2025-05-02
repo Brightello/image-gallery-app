@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user)
       setPending(false)
-      console.log(user)
     })
     return () => {
       unsubscribe()
