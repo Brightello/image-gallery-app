@@ -26,6 +26,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}>
                 <Route path="saved" element={<Saved />} />
                 <Route path="my-posts" element={<MyPosts />} />
+                <Route index element={<MyPosts />} />
                 <Route path="community" element={<Community />} />
               </Route>
             </Route>
