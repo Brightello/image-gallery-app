@@ -29,6 +29,7 @@ export const UserProvider = ({ children }) => {
   const handleFetchMyPosts = async () => {
     const pictures = await userFetchCurrentPosts()
     setMyPosts([...pictures])
+    await handleFetchMyPosts()
   }
 
   const handleChangePhoto = async (e) => {

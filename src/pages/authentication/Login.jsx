@@ -89,7 +89,7 @@ function Login() {
                     message: "Please, provide an e-mail"
                   },
                   pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/u,
                     message: "Invalid e-mail"
                   }
                 })}

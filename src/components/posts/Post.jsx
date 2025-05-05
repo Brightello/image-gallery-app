@@ -25,7 +25,6 @@ function Post({ file }) {
 
   const showPostDetails = () => {
     onOpen()
-    console.log(file)
   }
 
   const onMouseOver = (e) => {
@@ -51,6 +50,7 @@ function Post({ file }) {
         boxShadow="rgba(0, 0, 0, 0.2) 0px 1px 3px, rgba(0, 0, 0, 0.1) 0px 1px 2px;"
         borderRadius="2xl"
         src={imageUrl}
+        alt={"Post photo"}
       />
       <Fade in={display}>
         <Box>
@@ -64,7 +64,7 @@ function Post({ file }) {
             >
               <Icon
                 as={isSaved ? RiBookmarkFill : FiBookmark}
-                color={isSaved ? "yellow" : "#fff"}
+                color={isSaved ? "yellow" : "black"}
                 boxSize={6}
               />
             </Box>
