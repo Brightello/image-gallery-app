@@ -23,5 +23,5 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "./src/utils")
     }
   },
-  plugins: [react(), sass, eslint()]
+  plugins: [react(), sass, eslint({ failOnWarning: false, failOnError: true })]
 })

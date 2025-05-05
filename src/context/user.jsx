@@ -29,8 +29,8 @@ export const UserProvider = ({ children }) => {
   const handleFetchMyPosts = async () => {
     const pictures = await userFetchCurrentPosts()
     setMyPosts([...pictures])
-    await handleFetchMyPosts()
   }
+
   const handleChangePhoto = async (e) => {
     const selectedFile = e.target.files[0]
 
@@ -57,10 +57,17 @@ export const UserProvider = ({ children }) => {
     await handleFetchPosts()
     setSelectedFile(null)
   }
+
   const handleLogOut = async () => {
     try {
       await logOutUser()
-      showToast("User successfully logged out", "info", 3, "Have a nice day!")
+
+      showToast(
+        "User successfully have logged out",
+        "info",
+        3,
+        "Have a nice day!"
+      )
     } catch (error) {
       showToast("Error while logging out", "error", 3, `${error.message}`)
     }
@@ -101,6 +108,7 @@ export const UserProvider = ({ children }) => {
     handleUpload,
     handleLogOut
   }
+
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 

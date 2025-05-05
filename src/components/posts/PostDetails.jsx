@@ -1,9 +1,9 @@
-import { CloseIcon } from "@chakra-ui/icons"
 import { Box, Flex, Icon, Image } from "@chakra-ui/react"
 import { useAuth } from "@context/auth.jsx"
 import { UserContext } from "@context/user.jsx"
 import useFileStore from "@hooks/useFileStore.js"
 import React, { useContext } from "react"
+import { FaRegTrashAlt } from "react-icons/fa"
 import { FiBookmark } from "react-icons/fi"
 import { RiBookmarkFill } from "react-icons/ri"
 
@@ -22,6 +22,7 @@ function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {
       console.log(error.message)
     }
   }
+
   return (
     <CustomModal isOpen={isOpen} onClose={onClose}>
       <Flex
@@ -62,7 +63,7 @@ function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {
           >
             <Icon
               boxSize={{ base: 4, md: 7 }}
-              as={CloseIcon}
+              as={FaRegTrashAlt}
               color="#fff"
               onClick={() => handleDeletePost()}
             />

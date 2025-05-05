@@ -1,5 +1,5 @@
 import { Box, Flex, Input, List, ListItem, Text } from "@chakra-ui/react"
-import { Avatar, Header, Link } from "@components/index"
+import { Avatar, Header, Link } from "@components"
 import { useAuth } from "@context/auth.jsx"
 import { UserContext } from "@context/user.jsx"
 import React, { useContext } from "react"
@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom"
 function Dashboard() {
   const { userData, handleChangePhoto } = useContext(UserContext)
   const { currentUser } = useAuth()
+
   return (
     <>
       {userData && (
