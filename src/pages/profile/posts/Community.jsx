@@ -1,9 +1,7 @@
-import { AddIcon } from "@chakra-ui/icons"
-import { Box, Flex, Icon, Input, Text } from "@chakra-ui/react"
+import { Box, Flex, Input, Text } from "@chakra-ui/react"
 import { ImagesGrid } from "@components/index.js"
 import { UserContext } from "@context/user.jsx"
 import React, { useContext, useEffect } from "react"
-import { AiOutlineCamera } from "react-icons/ai"
 
 function Community() {
   const { communityPosts, handleFetchPosts } = useContext(UserContext)
@@ -17,14 +15,8 @@ function Community() {
   return (
     <>
       <Box align="center" mb="30px">
-        <Text
-          as="label"
-          htmlFor="file-input"
-          // onChange={(e) => handleUpload(e)}
-          cursor="pointer"
-        >
+        <Text as="label" htmlFor="file-input" cursor="pointer">
           <Input display="none" type="file" id="file-input" />
-          <Icon as={AddIcon} boxSize={5} />
         </Text>
         {communityPosts.length > 0 ? (
           <ImagesGrid items={communityPosts} />
@@ -36,8 +28,7 @@ function Community() {
             justify="center"
             align="center"
           >
-            <Text fontSize="4xl">No Photos Yet</Text>
-            <Icon as={AiOutlineCamera} boxSize={14}></Icon>
+            <Text fontSize="3xl">There are no posts in community yet</Text>
           </Flex>
         )}
       </Box>

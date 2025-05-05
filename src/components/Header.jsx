@@ -1,20 +1,11 @@
-import { Box, Flex, Heading, Icon, List, ListItem } from "@chakra-ui/react"
-import { useAuth } from "@context/auth.jsx"
-import { UserContext } from "@context/user.jsx"
-import React, { useContext, useState } from "react"
+import { Flex, Heading, Icon } from "@chakra-ui/react"
+import React from "react"
 import { GrGallery } from "react-icons/gr"
 import { Link as ReachLink } from "react-router-dom"
 
-import { Avatar, DropDown } from "./index.js"
+import { DropDown } from "./index.js"
 
 function Header() {
-  const [showUserOptions, setShowUserOptions] = useState(false)
-  const { userData, handleLogOut } = useContext(UserContext)
-  const { currentUser } = useAuth()
-  const showOptions = () => {
-    setShowUserOptions((prevState) => !prevState)
-  }
-
   return (
     <Flex
       as="header"
@@ -41,28 +32,7 @@ function Header() {
           </Heading>
         </Flex>
       </Flex>
-      <Box
-        position="relative"
-        display={{ base: "none", sm: "block" }}
-        onClick={() => showOptions()}
-      >
-        {userData && (
-          <Avatar
-            name={userData.firstname}
-            src={currentUser.photoURL ? currentUser.photoURL : ""}
-            position="relative"
-          />
-        )}
-      </Box>
-      {showUserOptions && (
-        <DropDown>
-          <List py="15px">
-            <ListItem py="10px" onClick={() => handleLogOut()}>
-              Log Out
-            </ListItem>
-          </List>
-        </DropDown>
-      )}
+      <DropDown />
     </Flex>
   )
 }

@@ -2,32 +2,33 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
   InputRightElement,
   Link,
-  Stack,
-  Text
+  Stack
 } from "@chakra-ui/react"
 import { Card } from "@components/index"
 import { useAuth } from "@context/auth.jsx"
 import useCustomToast from "@hooks/useCustomToast.js"
-import checkIfUserExists from "@utils/emailChecker.js"
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { BiLockAlt, BiLockOpenAlt } from "react-icons/bi"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Link as ReachLink, useNavigate } from "react-router-dom"
+
+import { FIREBASE_AUTH_ERROR_CODE } from "#firebase/constants"
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)
-  const formRef = useRef(null)
   const navigate = useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
+    reset
   } = useForm()
   const { email, password } = watch({})
   const { loginUser } = useAuth()
@@ -36,16 +37,23 @@ function Login() {
   const handleLogin = async () => {
     try {
       await loginUser(email, password)
-      formRef.current.reset()
+
+      reset()
+
       navigate("/dashboard")
+
       showToast("User successfully logged in", "success", 3, "Welcome!")
     } catch (error) {
-      if (error.code === "auth/wrong-password") {
+      if (
+        error.code === FIREBASE_AUTH_ERROR_CODE.WRONG_PASSWORD ||
+        error.code === FIREBASE_AUTH_ERROR_CODE.INVALID_EMAIL ||
+        error.code === FIREBASE_AUTH_ERROR_CODE.USER_NOT_FOUND
+      ) {
         showToast(
           "User credentials error",
           "error",
           3,
-          "Incorrect password. Please try again"
+          "Incorrect email/password. Please try again"
         )
       }
     }
@@ -54,6 +62,7 @@ function Login() {
   const showMyPassword = () => {
     setShowPassword((prevState) => !prevState)
   }
+
   return (
     <Flex as="main" justify="center" align="center" minH="100vh">
       <Card title="Login">
@@ -61,7 +70,6 @@ function Login() {
           Login
         </Heading>
         <FormControl
-          ref={formRef}
           isRequired
           as="form"
           mb="20px"
@@ -69,40 +77,55 @@ function Login() {
           noValidate
         >
           <Stack spacing={5}>
-            <Input
-              id="form_email"
-              type="email"
-              placeholder="Email"
-              isInvalid={errors.email}
-              {...register("email", {
-                required: { value: true, message: "Please,provide an e-mail" },
-                validate: async (value) =>
-                  !(await checkIfUserExists(value)) || "Invalid e-mail"
-              })}
-            />
-            {errors.email && <Text>{errors.email.message}</Text>}
-            <InputGroup>
+            <FormControl isInvalid={errors.email}>
               <Input
-                type={showPassword ? "text" : "password"}
-                id="form_password"
-                placeholder="Password"
-                autoComplete="off"
-                {...register("password", {
+                id="form_email"
+                type="email"
+                placeholder="Email"
+                isInvalid={errors.email}
+                {...register("email", {
                   required: {
                     value: true,
-                    message: "Please,provide a password"
+                    message: "Please, provide an e-mail"
+                  },
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid e-mail"
                   }
                 })}
               />
+              {errors.email && (
+                <FormErrorMessage>{errors.email.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isInvalid={errors.password}>
+              <InputGroup>
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  id="form_password"
+                  placeholder="Password"
+                  autoComplete="off"
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "Please, provide a password"
+                    }
+                  })}
+                />
 
-              <InputRightElement
-                onClick={() => showMyPassword()}
-                cursor="pointer"
-              >
-                {showPassword ? <BiLockOpenAlt /> : <BiLockAlt />}
-              </InputRightElement>
-            </InputGroup>
-            {errors.password && <Text>{errors.password.message}</Text>}
+                <InputRightElement
+                  onClick={() => showMyPassword()}
+                  userSelect="none"
+                  cursor="pointer"
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </InputRightElement>
+              </InputGroup>
+              {errors.password && (
+                <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
             <Button colorScheme="blue" type="submit">
               Login
             </Button>

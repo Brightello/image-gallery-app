@@ -1,9 +1,8 @@
-import { AddIcon } from "@chakra-ui/icons"
 import { Box, Flex, Icon, Input, Text } from "@chakra-ui/react"
 import { ImagesGrid } from "@components/index"
 import { UserContext } from "@context/user.jsx"
 import React, { useContext, useEffect } from "react"
-import { AiOutlineCamera } from "react-icons/ai"
+import { FaPlus } from "react-icons/fa"
 
 function MyPosts() {
   const { myPosts, handleUpload, handleFetchMyPosts } = useContext(UserContext)
@@ -23,15 +22,14 @@ function MyPosts() {
           cursor="pointer"
         >
           <Input display="none" type="file" id="file-input" />
-          <Icon as={AddIcon} boxSize={5} />
+          <Icon as={FaPlus} boxSize={5} />
         </Text>
       </Box>
       {myPosts.length > 0 ? (
         <ImagesGrid items={myPosts} />
       ) : (
-        <Flex gap={4} mb="-40px" fontSize="xl" justify="center" align="center">
-          <Text fontSize="4xl">No Photos Yet</Text>
-          <Icon as={AiOutlineCamera} boxSize={14}></Icon>
+        <Flex gap={4} justify="center" align="center">
+          <Text fontSize="3xl">You haven&apos;t posted anything yet</Text>
         </Flex>
       )}
     </>
