@@ -49,7 +49,7 @@ function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {
           <Box position="absolute" right="3%" top="3%" cursor="pointer">
             <Icon
               as={isSaved ? RiBookmarkFill : FiBookmark}
-              color={isSaved ? "yellow" : "#fff"}
+              color={isSaved ? "yellow" : "black"}
               boxSize={{ base: 6, md: 10 }}
               onClick={(e) => handleSavePost(file, e)}
             />
@@ -64,7 +64,7 @@ function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {
             <Icon
               boxSize={{ base: 4, md: 7 }}
               as={FaRegTrashAlt}
-              color="#fff"
+              color="black"
               onClick={() => handleDeletePost()}
             />
           </Box>

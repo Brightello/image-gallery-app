@@ -86,7 +86,7 @@ function Register() {
                 {...register("firstname", {
                   required: { value: true, message: "Firstname is required" },
                   pattern: {
-                    value: /^[A-Za-z]+$/g,
+                    value: /^\p{L}+$/u,
                     message: "Firstname can contain only letters"
                   }
                 })}
