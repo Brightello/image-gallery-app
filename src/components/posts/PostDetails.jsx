@@ -30,44 +30,30 @@ function PostDetails({ file, isSaved, handleSavePost, isOpen, onClose }) {
         w={{ base: "100%", md: "auto" }}
         h={{ base: "auto", md: "100%" }}
         position="relative"
+        justifyContent="center"
       >
-        <Box
-          h={{ base: "auto", md: "100%" }}
-          w={{ base: "100%", md: "50%" }}
-          position="relative"
-        >
-          <Image
-            src={file.imageUrl}
-            alt={file.name}
-            borderRadius="lg"
-            borderTopRightRadius={{ base: "lg", md: "none" }}
-            borderBottomRightRadius={{ base: "lg", md: "none" }}
-            h="100%"
-            w="100%"
-            objectFit="cover"
+        <Image src={file.imageUrl} alt={file.name} objectFit="cover" />
+        <Box position="absolute" right="3%" top="3%" cursor="pointer">
+          <Icon
+            as={isSaved ? RiBookmarkFill : FiBookmark}
+            color={isSaved ? "yellow" : "black"}
+            boxSize={{ base: 6, md: 10 }}
+            onClick={(e) => handleSavePost(file, e)}
           />
-          <Box position="absolute" right="3%" top="3%" cursor="pointer">
-            <Icon
-              as={isSaved ? RiBookmarkFill : FiBookmark}
-              color={isSaved ? "yellow" : "black"}
-              boxSize={{ base: 6, md: 10 }}
-              onClick={(e) => handleSavePost(file, e)}
-            />
-          </Box>
-          <Box
-            display={currentUser.uid === file.author ? "" : "none"}
-            position="absolute"
-            left="3%"
-            top="3%"
-            cursor="pointer"
-          >
-            <Icon
-              boxSize={{ base: 4, md: 7 }}
-              as={FaRegTrashAlt}
-              color="black"
-              onClick={() => handleDeletePost()}
-            />
-          </Box>
+        </Box>
+        <Box
+          display={currentUser.uid === file.author ? "" : "none"}
+          position="absolute"
+          left="3%"
+          top="3%"
+          cursor="pointer"
+        >
+          <Icon
+            boxSize={{ base: 4, md: 7 }}
+            as={FaRegTrashAlt}
+            color="black"
+            onClick={() => handleDeletePost()}
+          />
         </Box>
       </Flex>
     </CustomModal>
